@@ -2,11 +2,14 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
+use App\Models\User;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    if(app()->isLocal()) {
-        auth()->loginUsingId(1);
+    if(App::isLocal() && $user = User::query()->first()) {
+        Auth::login($user);
 
         return to_route('dashboard');
     }
