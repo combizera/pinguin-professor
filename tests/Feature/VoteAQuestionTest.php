@@ -27,6 +27,26 @@ it('should be able to like a question', function () {
     ]);
 });
 
+it('should be able to unlike a question', function () {
+    //    Arrange :: preparar
+    $user     = User::factory()->create();
+    $question = Question::factory()->create();
+    actingAs($user);
+
+    //    Act :: agir
+    $route = route('question.unlike', $question);
+
+    post($route);
+
+    //    Assert :: verificar
+    assertDatabaseHas('votes', [
+        'question_id' => $question->id,
+        'like'        => 0,
+        'unlike'      => 1,
+        'user_id'     => $user->id,
+    ]);
+});
+
 it('should not be able to like more than 1 time', function () {
     //    Arrange :: preparar
     $user     = User::factory()->create();
