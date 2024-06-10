@@ -11,7 +11,7 @@
                 type="submit">
                 <x-icons.thumbs-up class="w-5 h-5 hover:text-green-400 cursor-pointer" />
                 <p>
-                    {{ $question->likes }}
+                    {{ $question->votes_sum_like ?: 0 }}
                 </p>
             </button>
         </x-form>
@@ -19,7 +19,7 @@
             <button class="flex items-end space-x-1 text-red-700">
                 <x-icons.thumbs-down class="w-5 h-5 hover:text-red-400 cursor-pointer" />
                 <p>
-                    {{ $question->unlikes }}
+                    {{ $question->votes_sum_unlike ?: 0 }}
                 </p>
             </button>
         </x-form>
