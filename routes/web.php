@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Question\LikeController;
+use App\Http\Controllers\Question\UnlikeController;
 use App\Http\Controllers\QuestionController;
 use App\Models\User;
 use Illuminate\Support\Facades\App;
@@ -17,9 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -28,5 +29,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::post('/question/store', [QuestionController::class, 'store'])->name('question.store');
+Route::post('/question/like/{question}', LikeController::class)->name('question.like');
+Route::post('/question/unlike/{question}', UnlikeController::class)->name('question.unlike');
 
 require __DIR__ . '/auth.php';
