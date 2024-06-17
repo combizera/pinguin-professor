@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Question\LikeController;
+use App\Http\Controllers\Question\PublishController;
 use App\Http\Controllers\Question\UnlikeController;
 use App\Http\Controllers\QuestionController;
 use App\Models\User;
@@ -31,5 +32,6 @@ Route::middleware('auth')->group(function () {
 Route::post('/question/store', [QuestionController::class, 'store'])->name('question.store');
 Route::post('/question/like/{question}', LikeController::class)->name('question.like');
 Route::post('/question/unlike/{question}', UnlikeController::class)->name('question.unlike');
+Route::put('/question/publish/{question}', PublishController::class)->name('question.publish');
 
 require __DIR__ . '/auth.php';
