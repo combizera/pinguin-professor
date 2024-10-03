@@ -7,7 +7,6 @@ use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\post;
 
 it('should be able to create a new question bigger than 255 characters', function () {
-    //    Antes de criar qualquer teste precisamos levar em conta esses 3 A's
     //    Arrange :: preparar
     $user = User::factory()->create();
     actingAs($user);
